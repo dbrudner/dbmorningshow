@@ -1,0 +1,33 @@
+* {
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  width: 640px;
+  margin: auto;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+div.images {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+div.images div {
+  padding: 10px;
+}
+
+div.images div img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+#calendar {
+  margin-top: 60px;
+}
