@@ -1,0 +1,6 @@
+.popover-container {
+  width: 150px;
+  height: 200px;
+  position: absolute;
+  z-index: 1;
+}
