@@ -3,27 +3,29 @@ import "./popover.css";
 /**
  * Class for rendering a popover
  *
- * @param {HTMLElement} node - Node to append popover to
+ * @param {HTMLElement} el - el to append popover to
  * @param {HTMLElement} content - Popover inner content
  */
 export default class Popover {
-  constructor({ node, content }) {
-    this.node = node;
+  constructor({ el, content, style }) {
+    console.log("hi");
+    this.el = el;
     this.content = content;
-    // this.show = true;
+    this.style = style;
     this.htmlContent = "";
     this.body = document.querySelector("body");
     this.rendered = false;
 
     this.mount();
+    return this;
   }
 
   mount() {
     this.buildContainer();
     this.buildPopover();
-    this.setContainerPosition();
+    this.setStyle(this.style);
     this.appendPopoverContent();
-    this.renderPopover();
+    // this.renderPopover();
   }
 
   buildContainer() {
@@ -35,21 +37,31 @@ export default class Popover {
     this.htmlContent = `<div class="popover">${this.content}</div>`;
   }
 
-  setContainerPosition() {
-    const { top, left, height } = this.node.getBoundingClientRect();
-
-    this.container.style.top = `${top + height}px`;
-    this.container.style.left = `${left - 30}px`;
+  setStyle(style) {
+    console.log(style);
+    Object.assign(this.container.style, style);
+    return this;
   }
+
+  // setContainerPosition() {
+  //   const { top, left, height } = this.el.getBoundingClientRect();
+  //   // const { width } = document.querySelector('.fc-daygrid-day').getBoundingClientRect();
+
+  //   this.container.style.top = `${top + height}px`;
+  //   this.container.style.left = `${left - 30}px`;
+  //   Object.assign(style);
+  // }
 
   appendPopoverContent() {
     this.container.innerHTML = this.htmlContent;
   }
 
-  renderPopover() {
-    this.body.append(this.container);
+  attach(el) {
+    el.append(this.container);
     this.rendered = true;
   }
 
-  unmount() {}
+  unmount() {
+    this.container.remove();
+  }
 }

@@ -12,23 +12,17 @@
     <link href="./index.css" rel="stylesheet" />
   </head>
   <body>
-    <h1 class="title is-2">The Dave Brudner Morning Show</h1>
-    <!-- <section>
-      <div class="images">
-        <div>
-          <img src="./assets/boracay.jpg" alt="Me in Boracay" class="src" />
-        </div>
-        <div>
-          <img src="./assets/repent.jpg" alt="Me in Boracay" class="src" />
-        </div>
-        <div>
-          <img src="./assets/suit.jpg" alt="Me in Boracay" class="src" />
-        </div>
-      </div>
-    </section> -->
-    <section class="calendar">
-      <div id="calendar"></div>
-    </section>
+    <div class="title-container">
+      <h1 class="title is-size-1">The Dave Brudner Morning Show</h1>
+    </div>
+    <main>
+      <section class="calendar">
+        <div class="card" id="calendar"></div>
+      </section>
+      <section class="streams">
+        <ul id="streams"></ul>
+      </section>
+    </main>
     <script src="./index.js"></script>
   </body>
 </html>

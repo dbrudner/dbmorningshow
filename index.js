@@ -16,22 +16,62 @@ const client = contentful.createClient({
 });
 
 (async () => {
+  let popover;
+
   const { items } = await client.getEntries({ content_type: "stream" });
 
   const calendarEl = document.querySelector("#calendar");
 
   const eventClick = (info) => {
-    const { title, end, start } = info;
-    const { description, link } = info.event.extendedProps;
+    if (popover) popover.unmount();
+
+    const { el, event } = info;
+    const { title, end, start } = event;
+    const { description, link } = info.event.extendedProps.data;
+    const elDimensions = el.getBoundingClientRect();
+    const calendarEl = document.querySelector("#calendar");
+    const calendarElDimensions = calendarEl.getBoundingClientRect();
+
+    const top =
+      elDimensions.top - calendarElDimensions.top + elDimensions.height;
+    // const left = elDimensions.left - calendarElDimensions.left;
+
+    const style = {
+      top: `${top}px`,
+      // left: `${left}px`,
+      width: "300px",
+      maxHeight: "400px"
+    };
+
+    console.log({ description, link });
 
     const content = `<div>
-      <header class="card-header">
-        <p class="card-header-title">
+      <p class="card-header-title">
+        <a href=${link}>
           ${title}
-        </p>
-      </header>
+        </a>
+      </p>
+      <p>
+        ${documentToHtmlString(description)}
+      </P
     </div>`;
-    new Popover({ node: info.el, content });
+
+    popover = new Popover({
+      el,
+      content,
+      style
+    });
+
+    const offset = document
+      .querySelector(".fc-daygrid-day")
+      .getBoundingClientRect().width;
+
+    console.log(popover.container);
+
+    const left =
+      elDimensions.left - calendarElDimensions.left + offset / 2 - 150;
+
+    popover.setStyle({ left: `${left}px` }).attach(calendarEl);
   };
 
   const events = items.map(({ fields }) => ({
@@ -51,16 +91,39 @@ const client = contentful.createClient({
     events
   });
 
-  // console.log({ items });
+  const streamsEl = document.querySelector("#streams");
 
-  // for (const item of items) {
-  //   const options = {
-  //     title: item.fields.title,
-  //     start: item.fields.startDate
-  //   };
+  for (const item of items) {
+    const {
+      fields: { description, startDate, endDate, title, link }
+    } = item;
 
-  //   calendar.addEvent(options);
-  // }
+    const el = document.createElement("li");
+
+    el.innerHTML = `<div class="card">
+      <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4">
+            <a href=${link} target="_blank">
+              ${title}
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        ${documentToHtmlString(description)}
+        <time datetime="2016-1-1">${format(
+          new Date(startDate),
+          "M/d/yyyy @ h:mm a"
+        )}</time>
+      </div>
+    </div>
+    </div>`;
+
+    streamsEl.appendChild(el);
+  }
 
   await calendar.render();
 })();
