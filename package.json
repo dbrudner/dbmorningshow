@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html --port 8000"
+    "deploy": "npm run build && gh-pages -d dist",
+    "start": "parcel index.html --port 8000",
+    "build": "parcel build index.html --public-url /dbrudner/"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "tui-calendar": "^1.13.0"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "parcel-bundler": "^1.12.4"
   }
 }
