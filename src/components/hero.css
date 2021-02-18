@@ -1,0 +1,22 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  top: 15px;
+  left: 15px;
+  position: absolute;
+}
+
+h1 {
+  font-size: 64px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #d6d6d6;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 5px;
+}
