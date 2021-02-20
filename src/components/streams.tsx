@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import Grid from "@material-ui/core/Grid"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { compareDesc, format } from "date-fns"
+import { compareDesc, format, parseISO } from "date-fns"
 import "bulma/css/bulma.css"
 
 // const useStyles = makeStyles({
@@ -43,7 +43,7 @@ const StreamCard = ({ title, startDate, endDate, description, link }) => {
     <div className="card">
       <a href={link} target="_blank" style={{ margin: "20px" }}>
         <div className="card-content">
-          <span>{format(new Date(startDate), "LLL do Y h:mm aa (E)")}</span>
+          <span>{format((new Date(startDate)), "LLL do Y h:mm aa (E)")}</span>
           <img
             width="25"
             src="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png"
@@ -101,10 +101,10 @@ export default function Streams() {
         link: node.link,
       },
     }))
-    .sort((a, b) => compareDesc(a.start, b.start))
+    .sort((a, b) => compareDesc(parseISO(a.start), parseISO(b.start)))
 
   const sortedStreams = allContentfulStream.edges.sort((a, b) =>
-    compareDesc(a.node.startDate, b.node.startDate)
+    compareDesc(parseISO(a.node.startDate), parseISO(b.node.startDate))
   )
 
   console.log({ sortedStreams })

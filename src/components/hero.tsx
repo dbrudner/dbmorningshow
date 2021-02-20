@@ -5,7 +5,10 @@ import { useWindowSize } from "@react-hook/window-size"
 
 export default function Hero() {
   const ref = useRef(null)
-  const [width, height] = useWindowSize()
+  const [width] = useWindowSize()
+  const height = window.outerHeight;
+
+  console.log({height, width})
 
   const draw = () => {
     d3.select("svg").remove()
@@ -60,7 +63,7 @@ export default function Hero() {
     <div className="hero">
       <div ref={ref}></div>
       <div className="title">
-        <h1>The Dave Brudner Morning Show</h1>
+        <h1 className="is-size-1">The Dave Brudner Morning Show</h1>
         <h2>MWF 8:00 AM CT</h2>
       </div>
     </div>
