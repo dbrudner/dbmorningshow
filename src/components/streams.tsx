@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { compareDesc, format } from "date-fns"
 import "bulma/css/bulma.css"
+import ytlogo from "./yt.png"
 
 // const useStyles = makeStyles({
 //   root: {
@@ -46,7 +47,7 @@ const StreamCard = ({ title, startDate, endDate, description, link }) => {
           <span>{format(new Date(startDate), "LLL do Y h:mm aa (E)")}</span>
           <img
             width="25"
-            src="http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png"
+            src={ytlogo}
             style={{ display: "inline-block", margin: 0, float: "right" }}
           />
           <h2
