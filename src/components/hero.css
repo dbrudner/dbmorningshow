@@ -21,15 +21,19 @@ div.title h2 {
   letter-spacing: 5px;
 }
 
-a {
+a * {
   text-decoration: none;
-  color: inherit;
+  color: rgb(54, 54, 54);
   font-weight: 400;
 }
 
-a > h2:hover {
+a h2:hover {
   transition: all 1s;
-  color: dodgerblue;
+  /* color: dodgerblue; */
+}
+
+a {
+  color: rgb(54, 54, 54);
 }
 
 p {
@@ -47,5 +51,5 @@ p {
 } */
 
 body {
-  padding-bottom: 100px;
+  padding-bottom: 150px !important;
 }
